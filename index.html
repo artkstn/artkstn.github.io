@@ -137,8 +137,8 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 
 .bio { font-size: clamp(27px, 3vw, 33px); font-weight: 400; line-height: 1.32; max-width: 944px; text-wrap: pretty; }
 .bio__hi { display: block; }
-.bio a, .cta a { text-decoration: underline; text-underline-offset: 3px; transition: color 260ms ease; }
-.bio a:hover, .cta a:hover { color: var(--muted); text-decoration: none; }
+.bio a { text-decoration: underline; text-underline-offset: 3px; transition: color 260ms ease; }
+.bio a:hover { color: var(--muted); text-decoration: none; }
 
 .exp { padding-left: 8px; font-size: 16px; line-height: 1.56; }
 .exp__now {
@@ -190,8 +190,6 @@ a.card { cursor: pointer; }
 .card:hover .card__desc, .card:focus-visible .card__desc { max-height: 180px; opacity: 1; transition: max-height 680ms var(--ease), opacity 620ms ease 220ms; }
 .card__desc p { width: min(50%, 588px); font-size: 14px; line-height: 1.56; color: var(--muted); }
 
-.more { padding-left: 8px; margin-top: 16px; font-size: 14px; line-height: 1.56; color: var(--muted); max-width: 720px; }
-.cta { margin-top: 32px; padding-left: 8px; max-width: 944px; font-size: clamp(27px, 3vw, 33px); line-height: 1.32; text-wrap: pretty; }
 .copyright { margin-top: 24px; padding-left: 8px; font-size: 12px; line-height: 1.4; color: var(--muted); }
 
 /* Появление при прокрутке: мягкое */
@@ -217,7 +215,7 @@ a.card { cursor: pointer; }
   .content { gap: 40px; padding-left: 16px; padding-right: 16px; padding-bottom: 56px; }
   .hero { gap: 28px; }
   .portrait { width: 72px; height: 72px; }
-  .bio, .cta { font-size: 25px; line-height: 1.34; }
+  .bio { font-size: 25px; line-height: 1.34; }
   .exp { font-size: 15px; line-height: 1.5; }
   .action { padding: 16px 20px; }
   .exp__now { display: none; }
@@ -229,11 +227,10 @@ a.card { cursor: pointer; }
   .card__ph, .card__image-wrap, .card__image-wrap img { border-radius: 12px; }
   .card__desc, .card:hover .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
   .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
-  .more { font-size: 13px; line-height: 1.48; margin-top: 32px; }
 }
 @media (max-width: 390px) {
   .content { padding-left: 12px; padding-right: 12px; }
-  .bio, .cta { font-size: 23px; }
+  .bio { font-size: 23px; }
   .card { padding: 16px; }
 }
 @media (hover: none) {
@@ -335,10 +332,6 @@ a.card { cursor: pointer; }
         </div>
         <div class="card__image-wrap"><div class="card__ph"></div></div>
       </a>
-
-      <p class="more" data-reveal>Figma, Miro, Prototyping, User Research, CJM, User Flow, Product Design, Design Systems. Управление командой, разработка бизнес-требований, Agile Project Management. Английский B1.</p>
-
-      <p class="cta" data-reveal>Открыт к&nbsp;обсуждению опыта и&nbsp;новых ролей. Пишите в&nbsp;<a href="https://t.me/akostin" target="_blank" rel="noopener">Telegram</a> или&nbsp;<a href="mailto:kostin.a.artem@gmail.com">на&nbsp;почту</a>.</p>
 
       <p class="copyright">&copy; 2026 Артём Костин</p>
     </section>
