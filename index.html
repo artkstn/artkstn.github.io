@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Артём Костин: продуктовый дизайнер и тимлид</title>
+<meta name="description" content="Дизайнер цифровых B2B-продуктов и внутренних сервисов. Более 5 лет в крупных компаниях и стартапах: Альфа-Банк, Т-Банк, Ozon.">
+<meta name="author" content="Артём Костин">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+
+<!-- Open Graph. Картинка пока с прежнего сайта; при переезде на свой домен заменить на свою и добавить og:url -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Артём Костин: продуктовый дизайнер и тимлид">
+<meta property="og:description" content="Дизайнер цифровых B2B-продуктов и внутренних сервисов.">
+<meta property="og:image" content="https://framerusercontent.com/assets/7ggBg0mMLBp4gRBf1vpraaZpS8.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2319191A'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='600' text-anchor='middle' fill='%23FFFFFF' font-family='sans-serif'%3E%D0%90%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Артём Костин",
+  "jobTitle": "Руководитель группы",
+  "worksFor": { "@type": "Organization", "name": "Альфа-Банк" },
+  "email": "mailto:kostin.a.artem@gmail.com",
+  "sameAs": [
+    "https://t.me/akostin",
+    "https://www.linkedin.com/in/%D0%B0rtem-%D0%BAostin-42739712b"
+  ]
+}
+</script>
+
+<script>
+/* Тема до первой отрисовки, чтобы не мигало */
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  try {
+    var raw = localStorage.getItem('portfolio.state');
+    var data = raw ? JSON.parse(raw) : null;
+    var t = data && data.theme;
+    if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+
+<style>
+/* ============ Токены ============ */
+:root {
+  --font-main: 'Golos Text', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --page: #FFFFFF;
+  --text: #19191A;
+  --muted: #6F6F6F;       /* чуть темнее #8B8B8B, чтобы проходил контраст AA */
+  --card: #F4F4F4;
+  --tag: #E8E8E8;
+  --tag-text: #5A5A5A;
+  --media: #E8E8E8;
+
+  --content-width: 1040px;
+  --pad-top: 120px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0B0B0C; --text: #F2F2F2; --muted: #9A9A9A; --card: #161617; --tag: #252526; --tag-text: #B5B5B5; --media: #232324;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0B0B0C; --text: #F2F2F2; --muted: #9A9A9A; --card: #161617; --tag: #252526; --tag-text: #B5B5B5; --media: #232324;
+}
+
+/* ============ База ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--page); }
+body {
+  margin: 0; min-height: 100vh; background: var(--page); color: var(--text);
+  font-family: var(--font-main); line-height: 1.5;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+::selection { background: var(--text); color: var(--page); }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.nb { white-space: nowrap; }
+
+.skip { position: absolute; left: 16px; top: -64px; z-index: 50; background: var(--text); color: var(--page); padding: 12px 16px; border-radius: 12px; font-weight: 500; }
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + 16px); }
+
+/* Переключатель темы, маленькая таблетка в углу */
+.theme-toggle {
+  position: fixed; z-index: 10;
+  top: calc(env(safe-area-inset-top, 0px) + 28px); right: max(28px, env(safe-area-inset-right, 0px));
+  display: flex; align-items: center; justify-content: center;
+  min-height: 36px; padding: 9px 13px; border: 0; border-radius: 9999px;
+  background: var(--card); color: var(--muted);
+  font: 500 10px/1.4 var(--font-main); letter-spacing: 0.04em; text-transform: uppercase;
+  cursor: pointer; transition: background-color 280ms ease, color 280ms ease;
+}
+.theme-toggle:hover { background: var(--tag); color: var(--text); }
+
+/* ============ Оболочка ============ */
+.page { width: 100%; max-width: 1600px; margin: 0 auto; }
+.content {
+  width: 100%; max-width: var(--content-width); margin: 0 auto;
+  padding: var(--pad-top) clamp(24px, 5vw, 48px) 120px;
+  display: flex; flex-direction: column; gap: 62px;
+}
+
+/* ============ Верх ============ */
+.hero { display: flex; flex-direction: column; gap: 40px; }
+.hero__lead { display: flex; flex-direction: column; gap: 32px; padding-left: 8px; }
+
+/* Место под фото: замени .portrait__slot на <img src="..." alt="Артём Костин" width="240" height="240"> */
+.portrait { width: 120px; height: 120px; margin-left: 8px; border-radius: 50%; overflow: hidden; background: var(--tag); flex-shrink: 0; }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait__slot { width: 100%; height: 100%; display: grid; place-items: center; color: var(--tag-text); font-size: 12px; }
+
+.bio { font-size: clamp(27px, 3vw, 33px); font-weight: 400; line-height: 1.32; max-width: 944px; text-wrap: pretty; }
+.bio__hi { display: block; }
+.bio a, .cta a { text-decoration: underline; text-underline-offset: 3px; transition: color 260ms ease; }
+.bio a:hover, .cta a:hover { color: var(--muted); text-decoration: none; }
+
+.exp { padding-left: 8px; font-size: 16px; line-height: 1.56; }
+.exp__now {
+  display: inline-block; margin-left: 8px; vertical-align: 1px; padding: 3px 8px; border-radius: 9999px; background: var(--text); color: var(--page);
+  font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+.actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.action {
+  display: flex; align-items: center; justify-content: center; padding: 20px 24px;
+  border-radius: 9999px; background: var(--card); color: var(--text);
+  font: 500 16px/1.25 var(--font-main); cursor: pointer;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+.action:hover { background: var(--tag); }
+
+/* ============ Проекты ============ */
+.projects { display: flex; flex-direction: column; gap: 16px; }
+
+/* Блок проекта: скопируй любой <a class="card"> целиком */
+.card {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  padding: clamp(24px, 4.6vw, 48px); border-radius: 24px; background: var(--card); color: inherit;
+  transition: transform 700ms var(--ease);
+}
+a.card { cursor: pointer; }
+.card:hover { transform: scale(1.008); transition-duration: 820ms; }
+
+.card__header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+.card__who { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.card__logo {
+  flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 24px;
+  background: var(--text); color: var(--page); font-size: 16px; font-weight: 600; line-height: 1;
+}
+.card__title { font-size: 16px; font-weight: 500; line-height: 1.25; }
+.card__org { display: block; margin-top: 2px; font-size: 14px; line-height: 1.3; color: var(--muted); }
+.card__tag {
+  flex: none; padding: 9px 13px; border-radius: 32px; background: var(--tag); color: var(--tag-text);
+  font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+.card__image-wrap { width: 100%; max-width: 852px; margin: 0 auto; border-radius: 16px; overflow: hidden; transition: transform 700ms var(--ease); }
+.card__image-wrap img { display: block; width: 100%; height: auto; border-radius: 16px; }
+.card__ph { aspect-ratio: 16 / 10; background: var(--media); border-radius: 16px; }
+.card:hover .card__image-wrap { transform: translateY(-8px); transition-duration: 820ms; }
+
+/* Описание проявляется при наведении (на телефонах видно всегда) */
+.card__desc { display: flex; overflow: hidden; max-height: 0; opacity: 0; transition: max-height 640ms var(--ease), opacity 420ms ease; }
+.card:hover .card__desc, .card:focus-visible .card__desc { max-height: 180px; opacity: 1; transition: max-height 680ms var(--ease), opacity 620ms ease 220ms; }
+.card__desc p { width: min(50%, 588px); font-size: 14px; line-height: 1.56; color: var(--muted); }
+
+.more { padding-left: 8px; margin-top: 16px; font-size: 14px; line-height: 1.56; color: var(--muted); max-width: 720px; }
+.cta { margin-top: 32px; padding-left: 8px; max-width: 944px; font-size: clamp(27px, 3vw, 33px); line-height: 1.32; text-wrap: pretty; }
+.copyright { margin-top: 24px; padding-left: 8px; font-size: 12px; line-height: 1.4; color: var(--muted); }
+
+/* Появление при прокрутке: мягкое */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity 800ms ease, transform 800ms var(--ease); }
+  .js [data-reveal].in { opacity: 1; transform: none; }
+  .js .card[data-reveal].in { transition: transform 700ms var(--ease), opacity 800ms ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* ============ Адаптив ============ */
+@media (max-width: 900px) {
+  :root { --pad-top: 72px; }
+  .content { gap: 48px; padding-bottom: 80px; }
+  .hero { gap: 32px; }
+  .card__header { margin-bottom: 32px; }
+}
+@media (max-width: 640px) {
+  :root { --pad-top: 60px; }
+  .content { gap: 40px; padding-left: 16px; padding-right: 16px; padding-bottom: 56px; }
+  .hero { gap: 28px; }
+  .portrait { width: 72px; height: 72px; }
+  .bio, .cta { font-size: 25px; line-height: 1.34; }
+  .exp { font-size: 15px; line-height: 1.5; }
+  .action { padding: 16px 20px; }
+  .exp__now { display: none; }
+  .actions { gap: 10px; }
+  .theme-toggle { top: calc(env(safe-area-inset-top, 0px) + 16px); right: 16px; }
+  .card { border-radius: 18px; padding: 18px; cursor: default; }
+  .card:hover, .card:hover .card__image-wrap { transform: none; }
+  .card__header { margin-bottom: 20px; }
+  .card__ph, .card__image-wrap, .card__image-wrap img { border-radius: 12px; }
+  .card__desc, .card:hover .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
+  .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
+  .more { font-size: 13px; line-height: 1.48; margin-top: 32px; }
+}
+@media (max-width: 390px) {
+  .content { padding-left: 12px; padding-right: 12px; }
+  .bio, .cta { font-size: 23px; }
+  .card { padding: 16px; }
+}
+@media (hover: none) {
+  .card:hover, .card:hover .card__image-wrap { transform: none; }
+  .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">К содержимому</a>
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Включить тёмную тему"><span data-theme-label>Тёмная</span></button>
+
+<div class="page">
+  <main class="content" id="main">
+
+    <section class="hero">
+      <div class="portrait">
+        <div class="portrait__slot" role="img" aria-label="Место под фотографию">Фото</div>
+      </div>
+
+      <div class="hero__lead">
+        <h1 class="bio">
+          <span class="bio__hi">Привет, я Артём.</span>
+          Продуктовый дизайнер и тимлид. Больше пяти лет проектирую сложные B2B-сервисы для банков, логистики и стартапов. Сейчас руковожу дизайном эквайринга в&nbsp;<a class="nb" href="https://alfabank.ru" target="_blank" rel="noopener">Альфа-Банке</a>, раньше с нуля собрал команду в&nbsp;<a href="https://www.ozon.ru" target="_blank" rel="noopener">Ozon</a> и запустил AI-ассистентов для бизнеса.
+        </h1>
+      </div>
+
+      <div class="exp-wrap">
+        <h2 class="sr-only">Опыт</h2>
+        <ul class="exp">
+          <li>Руководитель группы, <span class="nb">Альфа-Банк</span>, <span class="nb">с&nbsp;2026</span><span class="exp__now">сейчас</span></li>
+          <li>Старший продуктовый дизайнер, <span class="nb">Альфа-Банк</span>, <span class="nb">2025-2026</span></li>
+          <li>Старший продуктовый дизайнер, <span class="nb">Т-Банк</span>, <span class="nb">2024</span></li>
+          <li>Руководитель группы, Ozon, <span class="nb">2022-2024</span></li>
+          <li>Старший продуктовый дизайнер, Ozon, <span class="nb">2021-2022</span></li>
+          <li>UX-дизайнер, ARRIVAL, <span class="nb">2019-2021</span></li>
+          <li>UX-дизайнер, AIC, <span class="nb">2018-2021</span></li>
+        </ul>
+      </div>
+
+      <nav class="actions" aria-label="Контакты и резюме">
+        <a class="action" href="https://t.me/akostin" target="_blank" rel="noopener">Telegram</a>
+        <a class="action" href="https://akostin.notion.site/CV-7d8bf76ded7b4d8f87cf8cc8972de49a" target="_blank" rel="noopener">CV</a>
+        <a class="action" href="https://www.linkedin.com/in/%D0%B0rtem-%D0%BAostin-42739712b" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="action" href="mailto:kostin.a.artem@gmail.com">Email</a>
+      </nav>
+    </section>
+
+    <section class="projects" aria-labelledby="projects-title">
+      <h2 class="sr-only" id="projects-title">Проекты</h2>
+
+      <!--
+        КАК ДОБАВИТЬ ПРОЕКТ: скопируй любой <a class="card"> целиком и поменяй href, букву, название и компанию.
+        БУКВА В КРУЖКЕ: .card__logo, потом можно заменить на <img src="logo.svg" alt="" width="40" height="40">.
+        ГОД: <span class="card__tag">2021-2022</span> справа в шапке; если года нет, удали строку.
+        ПРЕВЬЮ: вместо <div class="card__ph"></div> положи <img src="..." alt="..." width="1704" height="1064" loading="lazy">.
+        ОПИСАНИЕ: под .card__image-wrap добавь <div class="card__desc"><p>Одно предложение про задачу и результат.</p></div>;
+                  на компьютере оно появляется при наведении, на телефоне видно всегда.
+        ССЫЛКИ: сейчас ведут на кейсы прежнего сайта; позже заменить на свои страницы (например cases/betest.html).
+      -->
+
+      <a class="card" href="https://akostin.framer.website/work/betest" data-reveal>
+        <div class="card__header">
+          <div class="card__who">
+            <span class="card__logo" aria-hidden="true">B</span>
+            <div><h3 class="card__title">Betest</h3><span class="card__org">Betest.io (Beta), стартап</span></div>
+          </div>
+        </div>
+        <div class="card__image-wrap"><div class="card__ph"></div></div>
+      </a>
+
+      <a class="card" href="https://akostin.framer.website/work/route-planner-cs" data-reveal>
+        <div class="card__header">
+          <div class="card__who">
+            <span class="card__logo" aria-hidden="true">O</span>
+            <div><h3 class="card__title">Route Planner CS</h3><span class="card__org">Ozon</span></div>
+          </div>
+        </div>
+        <div class="card__image-wrap"><div class="card__ph"></div></div>
+      </a>
+
+      <a class="card" href="https://akostin.framer.website/work/ozon-point" data-reveal>
+        <div class="card__header">
+          <div class="card__who">
+            <span class="card__logo" aria-hidden="true">O</span>
+            <div><h3 class="card__title">Навигация для приложения ПВЗ</h3><span class="card__org">Ozon</span></div>
+          </div>
+        </div>
+        <div class="card__image-wrap"><div class="card__ph"></div></div>
+      </a>
+
+      <a class="card" href="https://akostin.framer.website/work/arrival" data-reveal>
+        <div class="card__header">
+          <div class="card__who">
+            <span class="card__logo" aria-hidden="true">A</span>
+            <div><h3 class="card__title">Fleet Management System</h3><span class="card__org">ARRIVAL</span></div>
+          </div>
+          <span class="card__tag">2019-2021</span>
+        </div>
+        <div class="card__image-wrap"><div class="card__ph"></div></div>
+      </a>
+
+      <p class="more" data-reveal>Figma, Miro, Prototyping, User Research, CJM, User Flow, Product Design, Design Systems. Управление командой, разработка бизнес-требований, Agile Project Management. Английский B1.</p>
+
+      <p class="cta" data-reveal>Буду рад обсудить опыт и подходящие роли. Пишите в <a href="https://t.me/akostin" target="_blank" rel="noopener">Telegram</a> или <a href="mailto:kostin.a.artem@gmail.com">на почту</a>.</p>
+
+      <p class="copyright">&copy; 2026 Артём Костин</p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+  /* Клиентское хранилище: один namespaced JSON-ключ на всё приложение,
+     с полем version для будущих миграций формата. */
+  var STORAGE_KEY = 'portfolio.state';
+  function readState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { version: 1 };
+      var data = JSON.parse(raw);
+      if (!data || typeof data !== 'object') return { version: 1 };
+      if (data.version !== 1) return { version: 1 }; /* сюда добавлять миграции старых версий */
+      return data;
+    } catch (e) {
+      return { version: 1 };
+    }
+  }
+  function writeState(patch) {
+    try {
+      var data = readState();
+      for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) data[k] = patch[k];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {}
+  }
+
+  /* Тема */
+  var btn = document.querySelector('[data-theme-toggle]');
+  var label = document.querySelector('[data-theme-label]');
+  function current() { return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light'); }
+  function syncTheme() {
+    var dark = current() === 'dark';
+    label.textContent = dark ? 'Светлая' : 'Тёмная';
+    btn.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', dark ? '#0B0B0C' : '#FFFFFF');
+  }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    writeState({ theme: next });
+    syncTheme();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', syncTheme);
+  syncTheme();
+
+  /* Появление при прокрутке */
+  var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
