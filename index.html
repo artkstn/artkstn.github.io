@@ -139,6 +139,10 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 .bio a:hover { color: var(--muted); text-decoration: none; }
 
 .exp { padding-left: 8px; font-size: 16px; line-height: 1.56; }
+.exp__group + .exp__group { margin-top: 14px; }
+.exp__org { font-weight: 500; }
+.exp__roles { padding-left: 14px; margin-top: 2px; border-left: 2px solid var(--tag); }
+.exp__roles li { padding: 3px 0; }
 .exp__now {
   display: inline-block; margin-left: 8px; vertical-align: 1px; padding: 3px 8px; border-radius: 9999px; background: var(--text); color: var(--page);
   font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase;
@@ -260,12 +264,32 @@ a.card { cursor: pointer; }
       <div class="exp-wrap">
         <h2 class="sr-only">Опыт</h2>
         <ul class="exp">
-          <li>Руководитель группы дизайна, <span class="nb">Альфа-Банк</span>, <span class="nb">с&nbsp;2026</span><span class="exp__now">сейчас</span></li>
-          <li>Старший продуктовый дизайнер, <span class="nb">Альфа-Банк</span>, <span class="nb">2025-2026</span></li>
-          <li>Старший продуктовый дизайнер, <span class="nb">Т-Банк</span>, <span class="nb">2024</span></li>
-          <li>Руководитель группы дизайна, Ozon, <span class="nb">2022-2024</span></li>
-          <li>Старший продуктовый дизайнер, Ozon, <span class="nb">2021-2022</span></li>
-          <li>UX-специалист, AIC, <span class="nb">2018-2021</span></li>
+          <li class="exp__group">
+            <span class="exp__org">Альфа-Банк</span>
+            <ul class="exp__roles">
+              <li>Руководитель группы дизайна, <span class="nb">с&nbsp;2026</span><span class="exp__now">сейчас</span></li>
+              <li>Старший продуктовый дизайнер, <span class="nb">2025-2026</span></li>
+            </ul>
+          </li>
+          <li class="exp__group">
+            <span class="exp__org">Т-Банк</span>
+            <ul class="exp__roles">
+              <li>Старший продуктовый дизайнер, <span class="nb">2024</span></li>
+            </ul>
+          </li>
+          <li class="exp__group">
+            <span class="exp__org">Ozon</span>
+            <ul class="exp__roles">
+              <li>Руководитель группы дизайна, <span class="nb">2022-2024</span></li>
+              <li>Старший продуктовый дизайнер, <span class="nb">2021-2022</span></li>
+            </ul>
+          </li>
+          <li class="exp__group">
+            <span class="exp__org">AIC</span>
+            <ul class="exp__roles">
+              <li>UX-специалист, <span class="nb">2018-2021</span></li>
+            </ul>
+          </li>
         </ul>
       </div>
 
