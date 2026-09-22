@@ -231,6 +231,17 @@ a.card { cursor: pointer; }
 .cv-contact a { text-decoration: underline; text-underline-offset: 3px; }
 .cv-contact a:hover { color: var(--text); }
 
+/* Подсказка «Скопировано» над ссылкой на email */
+[data-copy-email] { position: relative; }
+.copy-toast {
+  position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: 1;
+  padding: 6px 11px; border-radius: 9999px; background: var(--text); color: var(--page);
+  font-size: 11px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none;
+  opacity: 0; transform: translate(-50%, 4px); pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms var(--ease);
+}
+.copy-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
 .cv-section { margin-top: 28px; }
 
 .cv-entry + .cv-entry { margin-top: 20px; }
@@ -430,7 +441,8 @@ a.card { cursor: pointer; }
       <p>Design&nbsp;Lead&nbsp;/&nbsp;Product&nbsp;Manager</p>
     </div>
 
-    <p class="cv-contact">+7&nbsp;(999)&nbsp;002‑09‑11&nbsp;· <a href="mailto:kostin.a.artem@gmail.com">kostin.a.artem@gmail.com</a>&nbsp;· <a href="https://t.me/akostin" target="_blank" rel="noopener">Telegram:&nbsp;@akostin</a></p>
+    <p class="cv-contact">+7&nbsp;(999)&nbsp;002‑09‑11&nbsp;· <a href="mailto:kostin.a.artem@gmail.com" data-copy-email="kostin.a.artem@gmail.com">kostin.a.artem@gmail.com<span class="copy-toast" aria-hidden="true">Скопировано</span></a>&nbsp;· <a href="https://t.me/akostin" target="_blank" rel="noopener">Telegram:&nbsp;@akostin</a></p>
+    <span class="sr-only" role="status" aria-live="polite" data-copy-announcer></span>
 
     <p class="cv-summary">5+&nbsp;лет опыта в&nbsp;продуктовом дизайне (fintech, B2B, логистика), включая 2+&nbsp;года в&nbsp;роли лида&nbsp;— руководил командами до&nbsp;5&nbsp;дизайнеров в&nbsp;Альфа-Банке и&nbsp;Ozon. Фокус&nbsp;— сложные B2B-сценарии, дизайн-процесс и&nbsp;менторство.</p>
 
@@ -619,6 +631,38 @@ a.card { cursor: pointer; }
   openBtn.addEventListener('click', open);
   closeEls.forEach(function (el) { el.addEventListener('click', close); });
   backdrop.addEventListener('click', function (e) { if (e.target === backdrop) close(); });
+})();
+
+(function () {
+  /* Копирование email по клику вместо открытия почтового клиента */
+  var announcer = document.querySelector('[data-copy-announcer]');
+  var links = [].slice.call(document.querySelectorAll('[data-copy-email]'));
+
+  links.forEach(function (link) {
+    var toast = link.querySelector('.copy-toast');
+    var hideTimer = null;
+
+    link.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+      e.preventDefault();
+
+      var email = link.getAttribute('data-copy-email');
+      navigator.clipboard.writeText(email).then(function () {
+        if (toast) {
+          clearTimeout(hideTimer);
+          toast.classList.add('is-visible');
+          hideTimer = setTimeout(function () { toast.classList.remove('is-visible'); }, 1600);
+        }
+        if (announcer) {
+          announcer.textContent = '';
+          window.requestAnimationFrame(function () { announcer.textContent = 'Email скопирован в буфер обмена'; });
+        }
+      }).catch(function () {
+        window.location.href = link.href;
+      });
+    });
+  });
 })();
 </script>
 </body>
