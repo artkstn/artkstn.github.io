@@ -118,6 +118,7 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
   cursor: pointer; transition: background-color 280ms ease, color 280ms ease;
 }
 .theme-toggle:hover { background: var(--tag); color: var(--text); }
+body.cv-open .theme-toggle { display: none; }
 
 /* ============ Оболочка ============ */
 .page { width: 100%; max-width: 1600px; margin: 0 auto; }
@@ -209,15 +210,19 @@ a.card { cursor: pointer; }
   background: var(--page); color: var(--text); border-radius: 24px;
   padding: clamp(24px, 4vw, 44px); box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
 }
-.cv-modal__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
-.cv-modal__top h2 { font-size: 22px; font-weight: 500; }
-.cv-modal__top p { margin-top: 4px; font-size: 14px; color: var(--muted); }
-.cv-modal__close {
-  flex: none; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 9999px;
-  background: var(--card); color: var(--muted); font-size: 16px; line-height: 1; cursor: pointer;
-  transition: background-color 280ms ease, color 280ms ease;
+.cv-modal__head { margin-bottom: 32px; }
+.cv-modal__head h2 { font-size: 22px; font-weight: 500; }
+.cv-modal__head p { margin-top: 4px; font-size: 14px; color: var(--muted); }
+
+/* Крестик закрытия — в углу страницы, поверх подложки */
+.cv-close {
+  position: fixed; z-index: 110;
+  top: calc(env(safe-area-inset-top, 0px) + 28px); right: max(28px, env(safe-area-inset-right, 0px));
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 9999px;
+  background: var(--card); color: var(--text); font-size: 18px; line-height: 1; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); transition: transform 280ms var(--ease), background-color 280ms ease;
 }
-.cv-modal__close:hover { background: var(--tag); color: var(--text); }
+.cv-close:hover { background: var(--tag); transform: scale(1.06); }
 
 .cv-contact { font-size: 14px; color: var(--muted); }
 .cv-contact a { text-decoration: underline; text-underline-offset: 3px; }
@@ -236,9 +241,6 @@ a.card { cursor: pointer; }
 .cv-entry ul { margin-top: 8px; padding-left: 18px; list-style: disc; display: flex; flex-direction: column; gap: 4px; }
 .cv-entry li { font-size: 14px; line-height: 1.5; }
 .cv-entry li::marker { color: var(--muted); }
-
-.cv-skills { font-size: 14px; line-height: 1.7; color: var(--text); }
-.cv-skills b { font-weight: 500; }
 
 .cv-summary { margin-top: 28px; padding: 16px 20px; border-radius: 16px; background: var(--card); font-size: 14px; line-height: 1.56; }
 
@@ -415,13 +417,12 @@ a.card { cursor: pointer; }
 </div>
 
 <div class="cv-backdrop" data-cv-backdrop aria-hidden="true">
+  <button class="cv-close" type="button" data-cv-close aria-label="Закрыть резюме">&#10005;</button>
+
   <div class="cv-modal" role="dialog" aria-modal="true" aria-labelledby="cv-title">
-    <div class="cv-modal__top">
-      <div>
-        <h2 id="cv-title">Резюме</h2>
-        <p>Артём Костин — Design&nbsp;Lead&nbsp;/&nbsp;Product&nbsp;Manager</p>
-      </div>
-      <button class="cv-modal__close" type="button" data-cv-close aria-label="Закрыть резюме">&#10005;</button>
+    <div class="cv-modal__head">
+      <h2 id="cv-title">Резюме</h2>
+      <p>Артём Костин — Design&nbsp;Lead&nbsp;/&nbsp;Product&nbsp;Manager</p>
     </div>
 
     <p class="cv-contact">+7&nbsp;(999)&nbsp;002‑09‑11 · <a href="mailto:kostin.a.artem@gmail.com">kostin.a.artem@gmail.com</a> · <a href="https://t.me/akostin" target="_blank" rel="noopener">Telegram: @akostin</a></p>
@@ -505,28 +506,10 @@ a.card { cursor: pointer; }
       </div>
     </div>
 
-    <div class="cv-section">
-      <h3 class="cv-section__title">Образование</h3>
-      <div class="cv-entry">
-        <div class="cv-entry__head"><span class="cv-entry__role">Саратовский государственный университет им. Н.&nbsp;Г.&nbsp;Чернышевского</span><span class="cv-entry__dates">2014</span></div>
-        <span class="cv-entry__org">Юридический факультет — Политология</span>
-      </div>
-    </div>
-
-    <div class="cv-section">
-      <h3 class="cv-section__title">Навыки</h3>
-      <p class="cv-skills">
-        <b>Языки:</b> русский — родной; английский — B1 (средний)<br>
-        <b>Инструменты и методы:</b> Figma, Miro, Prototyping, User Research, CJM, User Flow, Product Design, Design Systems, управление командой, разработка бизнес-требований, UX-исследования, Agile Project Management<br>
-        <b>Водительские права:</b> категория B
-      </p>
-    </div>
-
     <p class="cv-summary">5+ лет опыта в продуктовом дизайне (fintech, B2B, логистика), включая 2+ года в роли лида — руководил командами до 5 дизайнеров в Альфа-Банке и Ozon. Фокус — сложные B2B-сценарии, дизайн-процесс и менторство.</p>
 
     <div class="cv-modal__actions">
       <a class="action" href="files/Artem-Kostin-CV-RU.pdf" download>Скачать PDF</a>
-      <button class="action" type="button" data-cv-close>Закрыть</button>
     </div>
   </div>
 </div>
@@ -617,7 +600,7 @@ a.card { cursor: pointer; }
     backdrop.setAttribute('aria-hidden', 'false');
     document.body.classList.add('cv-open');
     document.addEventListener('keydown', onKeydown);
-    var closeBtn = backdrop.querySelector('.cv-modal__close');
+    var closeBtn = backdrop.querySelector('.cv-close');
     if (closeBtn) closeBtn.focus();
   }
   function close() {
