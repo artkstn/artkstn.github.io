@@ -94,6 +94,7 @@ body {
   font-family: var(--font-main); line-height: 1.5;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
+body.cv-open { overflow: hidden; }
 h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 a { color: inherit; text-decoration: none; }
@@ -194,6 +195,56 @@ a.card { cursor: pointer; }
 
 .copyright { margin-top: 24px; padding-left: 8px; font-size: 12px; line-height: 1.4; color: var(--muted); }
 
+/* ============ Модалка резюме ============ */
+.cv-backdrop {
+  position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
+  padding: 24px; background: rgba(11, 11, 12, 0.5); backdrop-filter: blur(2px);
+}
+.cv-backdrop.is-open { display: flex; }
+.js .cv-modal { transform: translateY(8px) scale(0.98); opacity: 0; transition: transform 320ms var(--ease), opacity 260ms ease; }
+.js .cv-backdrop.is-open .cv-modal { transform: none; opacity: 1; }
+
+.cv-modal {
+  width: 100%; max-width: 760px; max-height: 85vh; overflow-y: auto;
+  background: var(--page); color: var(--text); border-radius: 24px;
+  padding: clamp(24px, 4vw, 44px); box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+}
+.cv-modal__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
+.cv-modal__top h2 { font-size: 22px; font-weight: 500; }
+.cv-modal__top p { margin-top: 4px; font-size: 14px; color: var(--muted); }
+.cv-modal__close {
+  flex: none; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 9999px;
+  background: var(--card); color: var(--muted); font-size: 16px; line-height: 1; cursor: pointer;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+.cv-modal__close:hover { background: var(--tag); color: var(--text); }
+
+.cv-contact { font-size: 14px; color: var(--muted); }
+.cv-contact a { text-decoration: underline; text-underline-offset: 3px; }
+.cv-contact a:hover { color: var(--text); }
+
+.cv-section { margin-top: 28px; }
+.cv-section__title {
+  margin-bottom: 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted);
+}
+
+.cv-entry + .cv-entry { margin-top: 20px; }
+.cv-entry__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.cv-entry__role { font-weight: 500; font-size: 15px; }
+.cv-entry__dates { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.cv-entry__org { display: block; margin-top: 2px; font-size: 13px; color: var(--muted); }
+.cv-entry ul { margin-top: 8px; padding-left: 18px; list-style: disc; display: flex; flex-direction: column; gap: 4px; }
+.cv-entry li { font-size: 14px; line-height: 1.5; }
+.cv-entry li::marker { color: var(--muted); }
+
+.cv-skills { font-size: 14px; line-height: 1.7; color: var(--text); }
+.cv-skills b { font-weight: 500; }
+
+.cv-summary { margin-top: 28px; padding: 16px 20px; border-radius: 16px; background: var(--card); font-size: 14px; line-height: 1.56; }
+
+.cv-modal__actions { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+.cv-modal__actions .action { padding: 16px 22px; font-size: 15px; }
+
 /* Появление при прокрутке: мягкое */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity 800ms ease, transform 800ms var(--ease); }
@@ -229,6 +280,9 @@ a.card { cursor: pointer; }
   .card__ph, .card__image-wrap, .card__image-wrap img { border-radius: 12px; }
   .card__desc, .card:hover .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
   .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
+  .cv-backdrop { padding: 0; align-items: flex-end; }
+  .cv-modal { max-width: none; max-height: 90vh; border-radius: 20px 20px 0 0; }
+  .cv-entry__head { flex-direction: column; align-items: flex-start; gap: 2px; }
 }
 @media (max-width: 390px) {
   .content { padding-left: 12px; padding-right: 12px; }
@@ -295,7 +349,7 @@ a.card { cursor: pointer; }
 
       <nav class="actions" aria-label="Контакты и резюме">
         <a class="action" href="https://t.me/akostin" target="_blank" rel="noopener">Telegram</a>
-        <a class="action" href="https://akostin.notion.site/CV-7d8bf76ded7b4d8f87cf8cc8972de49a" target="_blank" rel="noopener">CV</a>
+        <button class="action" type="button" data-cv-open aria-haspopup="dialog">CV</button>
         <a class="action" href="https://www.linkedin.com/in/%D0%B0rtem-%D0%BAostin-42739712b" target="_blank" rel="noopener">LinkedIn</a>
       </nav>
     </section>
@@ -360,6 +414,123 @@ a.card { cursor: pointer; }
   </main>
 </div>
 
+<div class="cv-backdrop" data-cv-backdrop aria-hidden="true">
+  <div class="cv-modal" role="dialog" aria-modal="true" aria-labelledby="cv-title">
+    <div class="cv-modal__top">
+      <div>
+        <h2 id="cv-title">Резюме</h2>
+        <p>Артём Костин — Design&nbsp;Lead&nbsp;/&nbsp;Product&nbsp;Manager</p>
+      </div>
+      <button class="cv-modal__close" type="button" data-cv-close aria-label="Закрыть резюме">&#10005;</button>
+    </div>
+
+    <p class="cv-contact">+7&nbsp;(999)&nbsp;002‑09‑11 · <a href="mailto:kostin.a.artem@gmail.com">kostin.a.artem@gmail.com</a> · <a href="https://t.me/akostin" target="_blank" rel="noopener">Telegram: @akostin</a></p>
+
+    <div class="cv-section">
+      <h3 class="cv-section__title">Опыт — 11 лет 1 месяц</h3>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Руководитель группы дизайна</span><span class="cv-entry__dates">Янв 2026 — сейчас · 9 мес</span></div>
+        <span class="cv-entry__org">Альфа-Банк · Москва</span>
+        <ul>
+          <li>Руковожу командой из 4 продуктовых дизайнеров в B2B-домене «Эквайринг» — UX торгового и интернет-эквайринга, внутренней CRM.</li>
+          <li>Инициировал и возглавил редизайн интернет-эквайринга: унификация UI и сокращение времени на ключевые сценарии для тысяч бизнес-клиентов.</li>
+          <li>Внедрил процесс фиксации UI-дефектов в домене — основа для системного контроля качества в проде.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Старший продуктовый дизайнер</span><span class="cv-entry__dates">Янв 2025 — Янв 2026 · 1 год 1 мес</span></div>
+        <span class="cv-entry__org">Альфа-Банк · Москва</span>
+        <ul>
+          <li>Спроектировал и запустил «Нейроофис» (AI-ассистенты для бизнеса) в приложении «Альфа-Бизнес».</li>
+          <li>Внедрил MVP-интеграцию AI-ассистентов в 3+ смежных продукта банка, создав единый пользовательский опыт.</li>
+          <li>Создал масштабируемый UX-паттерн подписки, переиспользованный в нескольких продуктовых линейках банка.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Старший продуктовый дизайнер</span><span class="cv-entry__dates">Авг 2024 — Ноя 2024 · 4 мес</span></div>
+        <span class="cv-entry__org">Т-Банк · Москва</span>
+        <ul>
+          <li>Отвечал за UX B2B-продуктов в направлении интернет-эквайринга.</li>
+          <li>Перепроектировал онбординг CloudKassir, сократив путь пользователя с 10 до 5 дней.</li>
+          <li>Предложил и передал в A/B-тест 3 гипотезы по улучшению конверсии платёжной формы (B2C).</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Руководитель группы дизайна</span><span class="cv-entry__dates">Сен 2022 — Авг 2024 · 2 года</span></div>
+        <span class="cv-entry__org">Ozon · Москва</span>
+        <ul>
+          <li>Сформировал с нуля и возглавил команду из 5 дизайнеров, отвечающую за UX внутренних логистических систем для ~200 000 сотрудников ПВЗ.</li>
+          <li>Возглавил редизайн ключевых операций (приёмка, выдача) в системе ПВЗ — сократил время выполнения на 30% и снизил число обращений в поддержку.</li>
+          <li>Построил практику регулярных UX-исследований, закрывшую 10+ узких мест в сценариях сотрудников.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Старший продуктовый дизайнер</span><span class="cv-entry__dates">Сен 2021 — Сен 2022 · 1 год 1 мес</span></div>
+        <span class="cv-entry__org">Ozon · Москва</span>
+        <ul>
+          <li>Спроектировал систему автопланирования смен для 5000+ курьеров, оптимизировав логистические затраты.</li>
+          <li>Спроектировал с нуля мобильное приложение «Пункт Ozon» для работы сотрудников ПВЗ без стационарного компьютера.</li>
+          <li>Провёл полный редизайн системы «Турбо ПВЗ» (~200 000 пользователей) и систему real-time мониторинга курьерской доставки.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Продуктовый дизайнер</span><span class="cv-entry__dates">Мар 2021 — Сен 2021 · 7 мес</span></div>
+        <span class="cv-entry__org">Ростелеком · Россия</span>
+        <ul>
+          <li>Проектировал интерфейсы для внутренних B2B CRM-систем, проводил интервью с операторами.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">UX-специалист</span><span class="cv-entry__dates">Авг 2018 — Фев 2021 · 2 года 7 мес</span></div>
+        <span class="cv-entry__org">AIC · Москва</span>
+        <ul>
+          <li>Проектировал UX для сайтов и приложений ключевых клиентов, включая MOEX, БКС и ФосАгро.</li>
+          <li>Спроектировал MVP системы управления автопарком ARRIVAL. Преподавал UX-проектирование в МТС Университете.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Менеджер проектов</span><span class="cv-entry__dates">Май 2015 — Апр 2018 · 3 года</span></div>
+        <span class="cv-entry__org">Инфо-Эксперт · Саратов</span>
+        <ul>
+          <li>Управлял проектами разработки приложений для Битрикс24: клиенты, документация, планирование.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3 class="cv-section__title">Образование</h3>
+      <div class="cv-entry">
+        <div class="cv-entry__head"><span class="cv-entry__role">Саратовский государственный университет им. Н.&nbsp;Г.&nbsp;Чернышевского</span><span class="cv-entry__dates">2014</span></div>
+        <span class="cv-entry__org">Юридический факультет — Политология</span>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3 class="cv-section__title">Навыки</h3>
+      <p class="cv-skills">
+        <b>Языки:</b> русский — родной; английский — B1 (средний)<br>
+        <b>Инструменты и методы:</b> Figma, Miro, Prototyping, User Research, CJM, User Flow, Product Design, Design Systems, управление командой, разработка бизнес-требований, UX-исследования, Agile Project Management<br>
+        <b>Водительские права:</b> категория B
+      </p>
+    </div>
+
+    <p class="cv-summary">5+ лет опыта в продуктовом дизайне (fintech, B2B, логистика), включая 2+ года в роли лида — руководил командами до 5 дизайнеров в Альфа-Банке и Ozon. Фокус — сложные B2B-сценарии, дизайн-процесс и менторство.</p>
+
+    <div class="cv-modal__actions">
+      <a class="action" href="files/Artem-Kostin-CV-RU.pdf" download>Скачать PDF</a>
+      <button class="action" type="button" data-cv-close>Закрыть</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function () {
   var root = document.documentElement;
@@ -420,6 +591,46 @@ a.card { cursor: pointer; }
     });
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
   items.forEach(function (el) { io.observe(el); });
+})();
+
+(function () {
+  /* Модалка резюме */
+  var backdrop = document.querySelector('[data-cv-backdrop]');
+  var openBtn = document.querySelector('[data-cv-open]');
+  var closeEls = [].slice.call(document.querySelectorAll('[data-cv-close]'));
+  if (!backdrop || !openBtn) return;
+  var lastFocus = null;
+
+  function onKeydown(e) {
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab') return;
+    var focusable = [].slice.call(backdrop.querySelectorAll('button, a[href]'));
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  function open() {
+    lastFocus = document.activeElement;
+    backdrop.classList.add('is-open');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('cv-open');
+    document.addEventListener('keydown', onKeydown);
+    var closeBtn = backdrop.querySelector('.cv-modal__close');
+    if (closeBtn) closeBtn.focus();
+  }
+  function close() {
+    backdrop.classList.remove('is-open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cv-open');
+    document.removeEventListener('keydown', onKeydown);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  openBtn.addEventListener('click', open);
+  closeEls.forEach(function (el) { el.addEventListener('click', close); });
+  backdrop.addEventListener('click', function (e) { if (e.target === backdrop) close(); });
 })();
 </script>
 </body>
