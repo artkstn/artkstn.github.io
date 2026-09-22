@@ -207,25 +207,28 @@ a.card { cursor: pointer; }
 .js .cv-backdrop.is-open .cv-modal { transform: none; opacity: 1; }
 
 .cv-modal {
+  position: relative;
   width: 100%; max-width: 760px; max-height: 85vh; overflow: hidden;
   display: flex; flex-direction: column;
   background: var(--page); color: var(--text); border-radius: 24px;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
 }
 .cv-modal__body { overflow-y: auto; padding: clamp(24px, 4vw, 44px); padding-bottom: 4px; }
-.cv-modal__head { margin-bottom: 32px; }
+.cv-modal__head { margin-bottom: 32px; padding-right: 44px; }
 .cv-modal__head h2 { font-size: 22px; font-weight: 500; }
 .cv-modal__head p { margin-top: 4px; font-size: 14px; color: var(--muted); }
 
-/* Крестик закрытия — в углу страницы, поверх подложки */
+/* Крестик закрытия — привязан к самой карточке, а не к вьюпорту:
+   на iOS Safari фиксированные элементы с env(safe-area-inset) дёргаются
+   при скрытии/появлении адресной строки во время скролла. */
 .cv-close {
-  position: fixed; z-index: 110;
-  top: calc(env(safe-area-inset-top, 0px) + 28px); right: max(28px, env(safe-area-inset-right, 0px));
-  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 9999px;
-  background: var(--card); color: var(--text); font-size: 18px; line-height: 1; cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); transition: transform 280ms var(--ease), background-color 280ms ease;
+  position: absolute; z-index: 2; top: 20px; right: 20px;
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 9999px;
+  background: var(--card); color: var(--text); cursor: pointer;
+  transition: transform 280ms var(--ease), background-color 280ms ease;
 }
 .cv-close:hover { background: var(--tag); transform: scale(1.06); }
+.cv-close svg { display: block; }
 
 .cv-contact { font-size: 14px; color: var(--muted); }
 .cv-contact a { text-decoration: underline; text-underline-offset: 3px; }
@@ -432,9 +435,10 @@ a.card { cursor: pointer; }
 </div>
 
 <div class="cv-backdrop" data-cv-backdrop aria-hidden="true">
-  <button class="cv-close" type="button" data-cv-close aria-label="Закрыть резюме">&#10005;</button>
-
   <div class="cv-modal" role="dialog" aria-modal="true" aria-labelledby="cv-title">
+    <button class="cv-close" type="button" data-cv-close aria-label="Закрыть резюме">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
    <div class="cv-modal__body">
     <div class="cv-modal__head">
       <h2 id="cv-title">Артём Костин</h2>
