@@ -121,7 +121,7 @@ a.card { cursor: pointer; }
    в .card__header добавь <span class="card__tag card__tag--soon">Скоро</span> */
 .card--soon { cursor: default; }
 .card--soon:hover, .card--soon:hover .card__image-wrap { transform: none; }
-.card__tag--soon { background: var(--text); color: var(--page); }
+.card__tag--soon { color: var(--muted); }
 
 .copyright { margin-top: 24px; padding-left: 8px; font-size: 12px; line-height: 1.4; color: var(--muted); }
 
@@ -201,11 +201,17 @@ a.card { cursor: pointer; }
 .cv-modal__actions .action { padding: 16px 22px; font-size: 15px; }
 
 /* ============ Шаблон страницы кейса ============ */
-.case-top { display: flex; }
+/* Зафиксирована в углу так же, как .theme-toggle — не уезжает при скролле
+   и составляет с переключателем темы одну пару фиксированных пилюль в шапке. */
+.case-top {
+  position: fixed; z-index: 10;
+  top: calc(env(safe-area-inset-top, 0px) + 28px); left: max(28px, env(safe-area-inset-left, 0px));
+}
+body.cv-open .case-top { display: none; }
 .case-back {
-  display: inline-flex; align-items: center; gap: 8px; padding: 14px 20px;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 9px 18px;
   border-radius: 9999px; background: var(--card); color: var(--text);
-  font: 500 14px/1.2 var(--font-main); transition: background-color 280ms ease;
+  font: 500 13px/1.3 var(--font-main); transition: background-color 280ms ease;
 }
 .case-back:hover { background: var(--tag); }
 
@@ -236,13 +242,12 @@ a.card { cursor: pointer; }
 .case-next-card {
   display: flex; align-items: center; gap: 20px; padding: 16px;
   border-radius: 20px; background: var(--card); color: inherit;
-  transition: background-color 280ms ease, transform 280ms var(--ease);
+  transition: background-color 320ms ease, transform 700ms var(--ease);
 }
-.case-next-card:hover { background: var(--tag); transform: translateX(4px); }
+.case-next-card:hover { background: var(--tag); transform: scale(1.008); }
 .case-next-card__thumb { flex: none; width: 96px; height: 72px; border-radius: 12px; overflow: hidden; }
 .case-next-card__thumb .card__ph { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 12px; }
 .case-next-card .card__who { flex: 1; min-width: 0; }
-.case-next-card__arrow { flex: none; font-size: 18px; line-height: 1; color: var(--muted); }
 
 /* ============ Адаптив ============ */
 @media (max-width: 900px) {
@@ -255,6 +260,7 @@ a.card { cursor: pointer; }
   .content { gap: 40px; padding-left: 16px; padding-right: 16px; padding-bottom: 56px; }
   .action { padding: 16px 20px; }
   .theme-toggle { top: calc(env(safe-area-inset-top, 0px) + 16px); right: 16px; }
+  .case-top { top: calc(env(safe-area-inset-top, 0px) + 16px); left: 16px; }
   .card { border-radius: 18px; padding: 18px; cursor: default; }
   .card:hover, .card:hover .card__image-wrap { transform: none; }
   .card__header { margin-bottom: 20px; }
