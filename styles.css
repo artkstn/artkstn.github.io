@@ -153,10 +153,6 @@ a.card { cursor: pointer; }
 .case-hero__title { max-width: 760px; font-size: clamp(24px, 2.8vw, 32px); font-weight: 500; line-height: 1.24; text-wrap: pretty; }
 .case-hero__desc { max-width: 620px; font-size: 16px; line-height: 1.6; color: var(--muted); }
 
-.case-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px 24px; padding: 24px clamp(20px, 3vw, 32px); border-radius: 20px; background: var(--card); }
-.case-meta dt { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-.case-meta dd { margin-top: 6px; font-size: 15px; line-height: 1.4; }
-
 .case-cover { width: 100%; border-radius: 24px; overflow: hidden; }
 .case-cover .card__ph { aspect-ratio: 16 / 9; border-radius: 24px; }
 
@@ -204,7 +200,6 @@ a.card { cursor: pointer; }
   .card__desc, .card:hover .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
   .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
   .case-gallery { grid-template-columns: 1fr; }
-  .case-meta { grid-template-columns: repeat(2, 1fr); }
   .actions { gap: 10px; }
   .case-next-card { padding: 12px; gap: 14px; }
   .case-next-card__thumb { width: 64px; height: 56px; }
