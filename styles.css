@@ -78,6 +78,7 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
   display: flex; flex-direction: column; gap: 62px;
 }
 
+.actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .action {
   display: flex; align-items: center; justify-content: center; padding: 20px 24px;
   border-radius: 9999px; background: var(--card); color: var(--text);
@@ -146,10 +147,11 @@ a.card { cursor: pointer; }
 }
 .case-back:hover { background: var(--tag); }
 
-.case-hero { display: flex; flex-direction: column; gap: 24px; }
-.case-hero__who { display: flex; align-items: center; gap: 14px; }
-.case-hero__who h1 { font-size: 16px; font-weight: 500; line-height: 1.25; }
-.case-hero__lead { max-width: 720px; font-size: clamp(22px, 2.6vw, 27px); font-weight: 400; line-height: 1.36; text-wrap: pretty; }
+.case-hero { display: flex; flex-direction: column; gap: 20px; }
+.case-hero__who { display: flex; align-items: center; gap: 12px; }
+.case-hero__who .card__org { margin-top: 0; }
+.case-hero__title { max-width: 760px; font-size: clamp(24px, 2.8vw, 32px); font-weight: 500; line-height: 1.24; text-wrap: pretty; }
+.case-hero__desc { max-width: 620px; font-size: 16px; line-height: 1.6; color: var(--muted); }
 
 .case-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px 24px; padding: 24px clamp(20px, 3vw, 32px); border-radius: 20px; background: var(--card); }
 .case-meta dt { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
@@ -172,6 +174,18 @@ a.card { cursor: pointer; }
 .case-next { display: flex; flex-direction: column; gap: 16px; }
 .case-next__label { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-left: 8px; }
 
+/* Компактная карточка вместо полноразмерной .card — превью + название в одну строку */
+.case-next-card {
+  display: flex; align-items: center; gap: 20px; padding: 16px;
+  border-radius: 20px; background: var(--card); color: inherit;
+  transition: background-color 280ms ease, transform 280ms var(--ease);
+}
+.case-next-card:hover { background: var(--tag); transform: translateX(4px); }
+.case-next-card__thumb { flex: none; width: 96px; height: 72px; border-radius: 12px; overflow: hidden; }
+.case-next-card__thumb .card__ph { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 12px; }
+.case-next-card .card__who { flex: 1; min-width: 0; }
+.case-next-card__arrow { flex: none; font-size: 18px; line-height: 1; color: var(--muted); }
+
 /* ============ Адаптив ============ */
 @media (max-width: 900px) {
   :root { --pad-top: 72px; }
@@ -191,6 +205,9 @@ a.card { cursor: pointer; }
   .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
   .case-gallery { grid-template-columns: 1fr; }
   .case-meta { grid-template-columns: repeat(2, 1fr); }
+  .actions { gap: 10px; }
+  .case-next-card { padding: 12px; gap: 14px; }
+  .case-next-card__thumb { width: 64px; height: 56px; }
 }
 @media (max-width: 390px) {
   .content { padding-left: 12px; padding-right: 12px; }

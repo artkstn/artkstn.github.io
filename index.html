@@ -385,7 +385,7 @@ a.card { cursor: pointer; }
       <!--
         КАК ДОБАВИТЬ ПРОЕКТ: скопируй любой <a class="card"> целиком и поменяй href, букву, название и компанию.
         БУКВА В КРУЖКЕ: .card__logo, потом можно заменить на <img src="logo.svg" alt="" width="40" height="40">.
-        ГОД: <span class="card__tag">2021-2022</span> справа в шапке; если года нет, удали строку.
+        ГОД НА КАРТОЧКАХ НЕ ПОКАЗЫВАЕМ (убрали намеренно) — .card__tag остался только для тега «Скоро».
         ПРЕВЬЮ: вместо <div class="card__ph"></div> положи <img src="..." alt="..." width="1704" height="1064" loading="lazy">.
         ОПИСАНИЕ: под .card__image-wrap добавь <div class="card__desc"><p>Одно предложение про задачу и результат.</p></div>;
                   на компьютере оно появляется при наведении, на телефоне видно всегда.
@@ -433,7 +433,6 @@ a.card { cursor: pointer; }
             <span class="card__logo" aria-hidden="true">A</span>
             <div><h3 class="card__title">Fleet Management System</h3><span class="card__org">ARRIVAL</span></div>
           </div>
-          <span class="card__tag">2019-2021</span>
         </div>
         <div class="card__image-wrap"><div class="card__ph"></div></div>
       </a>
