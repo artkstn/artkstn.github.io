@@ -1,6 +1,6 @@
 /*
-  Общий скрипт для страниц кейсов: тема + появление блоков при прокрутке.
-  Логика продублирована из index.html (там она инлайн — см. CLAUDE.md),
+  Общий скрипт для страниц кейсов: тема, появление блоков при прокрутке и модалка
+  резюме. Логика продублирована из index.html (там она инлайн — см. CLAUDE.md),
   здесь вынесена в файл, потому что кейсов несколько и дублировать
   script в каждом — хуже, чем в одном месте синхронизировать с index.html.
 */
@@ -61,4 +61,94 @@
     });
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
   items.forEach(function (el) { io.observe(el); });
+})();
+
+(function () {
+  /* Модалка резюме: разметки в DOM изначально нет — подгружаем ../cv-modal.html
+     (см. этот файл в корне репозитория) и вставляем перед первым открытием.
+     Путь ../cv-modal.html жёстко завязан на то, что script.js сейчас используют
+     только страницы на уровень ниже корня (cases/*.html). */
+  var openBtn = document.querySelector('[data-cv-open]');
+  if (!openBtn) return;
+
+  var loaded = false;
+  function wire() {
+    var backdrop = document.querySelector('[data-cv-backdrop]');
+    var closeEls = [].slice.call(document.querySelectorAll('[data-cv-close]'));
+    if (!backdrop) return;
+    var lastFocus = null;
+
+    function onKeydown(e) {
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key !== 'Tab') return;
+      var focusable = [].slice.call(backdrop.querySelectorAll('button, a[href]'));
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    function open() {
+      lastFocus = document.activeElement;
+      backdrop.classList.add('is-open');
+      backdrop.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cv-open');
+      document.addEventListener('keydown', onKeydown);
+      var closeBtn = backdrop.querySelector('.cv-close');
+      if (closeBtn) closeBtn.focus();
+    }
+    function close() {
+      backdrop.classList.remove('is-open');
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('cv-open');
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    open();
+    closeEls.forEach(function (el) { el.addEventListener('click', close); });
+    backdrop.addEventListener('click', function (e) { if (e.target === backdrop) close(); });
+    openBtn.addEventListener('click', open);
+
+    /* Копирование email по клику вместо открытия почтового клиента */
+    var announcer = backdrop.querySelector('[data-copy-announcer]');
+    var links = [].slice.call(backdrop.querySelectorAll('[data-copy-email]'));
+    links.forEach(function (link) {
+      var toast = link.querySelector('.copy-toast');
+      var hideTimer = null;
+      link.addEventListener('click', function (e) {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+        e.preventDefault();
+        var email = link.getAttribute('data-copy-email');
+        navigator.clipboard.writeText(email).then(function () {
+          if (toast) {
+            clearTimeout(hideTimer);
+            toast.classList.add('is-visible');
+            hideTimer = setTimeout(function () { toast.classList.remove('is-visible'); }, 1600);
+          }
+          if (announcer) {
+            announcer.textContent = '';
+            window.requestAnimationFrame(function () { announcer.textContent = 'Email скопирован в буфер обмена'; });
+          }
+        }).catch(function () {
+          window.location.href = link.href;
+        });
+      });
+    });
+  }
+
+  openBtn.addEventListener('click', function onFirstClick() {
+    if (loaded) return;
+    loaded = true;
+    fetch('../cv-modal.html').then(function (r) {
+      if (!r.ok) throw new Error('cv-modal fetch failed');
+      return r.text();
+    }).then(function (html) {
+      document.body.insertAdjacentHTML('beforeend', html);
+      wire();
+    }).catch(function () {
+      loaded = false;
+    });
+  });
 })();

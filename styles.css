@@ -46,6 +46,7 @@ body {
   font-family: var(--font-main); line-height: 1.5;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
+body.cv-open { overflow: hidden; }
 h1, h2, h3, p, ul, ol, figure, dl, dt, dd { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 a { color: inherit; text-decoration: none; }
@@ -69,6 +70,7 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
   cursor: pointer; transition: background-color 280ms ease, color 280ms ease;
 }
 .theme-toggle:hover { background: var(--tag); color: var(--text); }
+body.cv-open .theme-toggle { display: none; }
 
 /* ============ Оболочка ============ */
 .page { width: 100%; max-width: 1600px; margin: 0 auto; }
@@ -138,6 +140,70 @@ a.card { cursor: pointer; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 
+/* ============ Модалка резюме (кейсы подгружают её из ../cv-modal.html) ============ */
+.cv-backdrop {
+  position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
+  padding: 24px; background: rgba(11, 11, 12, 0.5); backdrop-filter: blur(2px);
+}
+.cv-backdrop.is-open { display: flex; }
+.js .cv-modal { transform: translateY(8px) scale(0.98); opacity: 0; transition: transform 320ms var(--ease), opacity 260ms ease; }
+.js .cv-backdrop.is-open .cv-modal { transform: none; opacity: 1; }
+
+.cv-modal {
+  position: relative;
+  width: 100%; max-width: 760px; max-height: 85vh; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--page); color: var(--text); border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+}
+.cv-modal__body { overflow-y: auto; padding: clamp(24px, 4vw, 44px); padding-bottom: 4px; }
+.cv-modal__head { margin-bottom: 32px; padding-right: 44px; }
+.cv-modal__head h2 { font-size: 22px; font-weight: 500; }
+.cv-modal__head p { margin-top: 4px; font-size: 14px; color: var(--muted); }
+
+.cv-close {
+  position: absolute; z-index: 2; top: 20px; right: 20px;
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 9999px;
+  background: var(--card); color: var(--text); cursor: pointer;
+  transition: transform 280ms var(--ease), background-color 280ms ease;
+}
+.cv-close:hover { background: var(--tag); transform: scale(1.06); }
+.cv-close svg { display: block; }
+
+.cv-contact { font-size: 14px; color: var(--muted); }
+.cv-contact a { text-decoration: underline; text-underline-offset: 3px; }
+.cv-contact a:hover { color: var(--text); }
+
+[data-copy-email] { position: relative; }
+.copy-toast {
+  position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: 1;
+  padding: 6px 11px; border-radius: 9999px; background: var(--text); color: var(--page);
+  font-size: 11px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none;
+  opacity: 0; transform: translate(-50%, 4px); pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms var(--ease);
+}
+.copy-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+.cv-section { margin-top: 28px; }
+
+.cv-entry + .cv-entry { margin-top: 20px; }
+.cv-entry__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.cv-entry__role { font-weight: 500; font-size: 15px; }
+.cv-entry__dates { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.cv-entry__org { display: block; margin-top: 2px; font-size: 13px; color: var(--muted); }
+.cv-entry ul { margin-top: 8px; padding-left: 18px; list-style: disc; display: flex; flex-direction: column; gap: 4px; }
+.cv-entry li { font-size: 14px; line-height: 1.5; }
+.cv-entry li::marker { color: var(--muted); }
+
+.cv-summary { margin-top: 28px; padding: 16px 20px; border-radius: 16px; background: var(--card); font-size: 14px; line-height: 1.56; }
+
+.cv-modal__actions {
+  flex: none; display: flex; gap: 12px; flex-wrap: wrap;
+  padding: 20px clamp(24px, 4vw, 44px) clamp(20px, 3.4vw, 32px);
+  border-top: 1px solid var(--card); background: var(--page);
+}
+.cv-modal__actions .action { padding: 16px 22px; font-size: 15px; }
+
 /* ============ Шаблон страницы кейса ============ */
 .case-top { display: flex; }
 .case-back {
@@ -203,6 +269,9 @@ a.card { cursor: pointer; }
   .actions { gap: 10px; }
   .case-next-card { padding: 12px; gap: 14px; }
   .case-next-card__thumb { width: 64px; height: 56px; }
+  .cv-backdrop { padding: 0; align-items: flex-end; }
+  .cv-modal { max-width: none; max-height: 90vh; border-radius: 20px 20px 0 0; }
+  .cv-entry__head { flex-direction: column; align-items: flex-start; gap: 2px; }
 }
 @media (max-width: 390px) {
   .content { padding-left: 12px; padding-right: 12px; }
