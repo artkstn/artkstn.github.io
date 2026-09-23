@@ -1,0 +1,202 @@
+/*
+  Общие стили для страниц кейсов (cases/*.html).
+  index.html остаётся самодостаточным файлом со своими инлайн-стилями
+  (см. CLAUDE.md) — здесь продублированы токены и часть базовых блоков
+  (.action, .card, реакция на прокрутку), чтобы кейсы визуально совпадали
+  с главной. При правке цветов/токенов проверяй оба места.
+*/
+
+/* ============ Токены ============ */
+:root {
+  --font-main: 'Golos Text', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --page: #FFFFFF;
+  --text: #19191A;
+  --muted: #6F6F6F;
+  --card: #F4F4F4;
+  --tag: #E8E8E8;
+  --tag-text: #5A5A5A;
+  --media: #E8E8E8;
+
+  --content-width: 1040px;
+  --pad-top: 120px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0B0B0C; --text: #F2F2F2; --muted: #9A9A9A; --card: #161617; --tag: #252526; --tag-text: #B5B5B5; --media: #232324;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0B0B0C; --text: #F2F2F2; --muted: #9A9A9A; --card: #161617; --tag: #252526; --tag-text: #B5B5B5; --media: #232324;
+}
+
+/* ============ База ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--page); }
+body {
+  margin: 0; min-height: 100vh; background: var(--page); color: var(--text);
+  font-family: var(--font-main); line-height: 1.5;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+h1, h2, h3, p, ul, ol, figure, dl, dt, dd { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { appearance: none; -webkit-appearance: none; border: 0; background: none; font: inherit; color: inherit; }
+a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+::selection { background: var(--text); color: var(--page); }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.nb { white-space: nowrap; }
+
+.skip { position: absolute; left: 16px; top: -64px; z-index: 50; background: var(--text); color: var(--page); padding: 12px 16px; border-radius: 12px; font-weight: 500; }
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + 16px); }
+
+.theme-toggle {
+  position: fixed; z-index: 10;
+  top: calc(env(safe-area-inset-top, 0px) + 28px); right: max(28px, env(safe-area-inset-right, 0px));
+  display: flex; align-items: center; justify-content: center;
+  min-height: 36px; padding: 9px 13px; border: 0; border-radius: 9999px;
+  background: var(--card); color: var(--muted);
+  font: 500 10px/1.4 var(--font-main); letter-spacing: 0.04em; text-transform: uppercase;
+  cursor: pointer; transition: background-color 280ms ease, color 280ms ease;
+}
+.theme-toggle:hover { background: var(--tag); color: var(--text); }
+
+/* ============ Оболочка ============ */
+.page { width: 100%; max-width: 1600px; margin: 0 auto; }
+.content {
+  width: 100%; max-width: var(--content-width); margin: 0 auto;
+  padding: var(--pad-top) clamp(24px, 5vw, 48px) 120px;
+  display: flex; flex-direction: column; gap: 62px;
+}
+
+.action {
+  display: flex; align-items: center; justify-content: center; padding: 20px 24px;
+  border-radius: 9999px; background: var(--card); color: var(--text);
+  font: 500 16px/1.25 var(--font-main); cursor: pointer;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+.action:hover { background: var(--tag); }
+
+/* ============ Карточки проектов (совпадают с index.html) ============ */
+.card {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  padding: clamp(24px, 4.6vw, 48px); border-radius: 24px; background: var(--card); color: inherit;
+  transition: transform 700ms var(--ease);
+}
+a.card { cursor: pointer; }
+.card:hover { transform: scale(1.008); transition-duration: 820ms; }
+
+.card__header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+.card__who { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.card__logo {
+  flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 24px;
+  background: var(--text); color: var(--page); font-size: 16px; font-weight: 600; line-height: 1;
+}
+.card__title { font-size: 16px; font-weight: 500; line-height: 1.25; }
+.card__org { display: block; margin-top: 2px; font-size: 14px; line-height: 1.3; color: var(--muted); }
+.card__tag {
+  flex: none; padding: 9px 13px; border-radius: 32px; background: var(--tag); color: var(--tag-text);
+  font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+.card__image-wrap { width: 100%; max-width: 852px; margin: 0 auto; border-radius: 16px; overflow: hidden; transition: transform 700ms var(--ease); }
+.card__image-wrap img { display: block; width: 100%; height: auto; border-radius: 16px; }
+.card__ph { aspect-ratio: 16 / 10; background: var(--media); border-radius: 16px; }
+.card:hover .card__image-wrap { transform: translateY(-8px); transition-duration: 820ms; }
+
+.card__desc { display: flex; overflow: hidden; max-height: 0; opacity: 0; transition: max-height 640ms var(--ease), opacity 420ms ease; }
+.card:hover .card__desc, .card:focus-visible .card__desc { max-height: 180px; opacity: 1; transition: max-height 680ms var(--ease), opacity 620ms ease 220ms; }
+.card__desc p { width: min(50%, 588px); font-size: 14px; line-height: 1.56; color: var(--muted); }
+
+/* Неактивная карточка («Скоро») — используется на index.html:
+   вместо <a class="card"> бери <div class="card card--soon" aria-disabled="true">,
+   в .card__header добавь <span class="card__tag card__tag--soon">Скоро</span> */
+.card--soon { cursor: default; }
+.card--soon:hover, .card--soon:hover .card__image-wrap { transform: none; }
+.card__tag--soon { background: var(--text); color: var(--page); }
+
+.copyright { margin-top: 24px; padding-left: 8px; font-size: 12px; line-height: 1.4; color: var(--muted); }
+
+/* Появление при прокрутке */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity 800ms ease, transform 800ms var(--ease); }
+  .js [data-reveal].in { opacity: 1; transform: none; }
+  .js .card[data-reveal].in { transition: transform 700ms var(--ease), opacity 800ms ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* ============ Шаблон страницы кейса ============ */
+.case-top { display: flex; }
+.case-back {
+  display: inline-flex; align-items: center; gap: 8px; padding: 14px 20px;
+  border-radius: 9999px; background: var(--card); color: var(--text);
+  font: 500 14px/1.2 var(--font-main); transition: background-color 280ms ease;
+}
+.case-back:hover { background: var(--tag); }
+
+.case-hero { display: flex; flex-direction: column; gap: 24px; }
+.case-hero__who { display: flex; align-items: center; gap: 14px; }
+.case-hero__who h1 { font-size: 16px; font-weight: 500; line-height: 1.25; }
+.case-hero__lead { max-width: 720px; font-size: clamp(22px, 2.6vw, 27px); font-weight: 400; line-height: 1.36; text-wrap: pretty; }
+
+.case-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px 24px; padding: 24px clamp(20px, 3vw, 32px); border-radius: 20px; background: var(--card); }
+.case-meta dt { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.case-meta dd { margin-top: 6px; font-size: 15px; line-height: 1.4; }
+
+.case-cover { width: 100%; border-radius: 24px; overflow: hidden; }
+.case-cover .card__ph { aspect-ratio: 16 / 9; border-radius: 24px; }
+
+.case-block { display: flex; flex-direction: column; gap: 16px; max-width: 720px; }
+.case-block h2 { font-size: 20px; font-weight: 500; line-height: 1.3; }
+.case-block p { font-size: 16px; line-height: 1.6; color: var(--text); }
+
+.case-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: none; width: 100%; margin-top: 8px; }
+.case-gallery .card__ph { aspect-ratio: 4 / 3; }
+
+.case-results { display: flex; flex-direction: column; gap: 10px; max-width: 720px; }
+.case-results li { position: relative; padding-left: 22px; font-size: 16px; line-height: 1.56; }
+.case-results li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--text); }
+
+.case-next { display: flex; flex-direction: column; gap: 16px; }
+.case-next__label { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-left: 8px; }
+
+/* ============ Адаптив ============ */
+@media (max-width: 900px) {
+  :root { --pad-top: 72px; }
+  .content { gap: 48px; padding-bottom: 80px; }
+  .card__header { margin-bottom: 32px; }
+}
+@media (max-width: 640px) {
+  :root { --pad-top: 60px; }
+  .content { gap: 40px; padding-left: 16px; padding-right: 16px; padding-bottom: 56px; }
+  .action { padding: 16px 20px; }
+  .theme-toggle { top: calc(env(safe-area-inset-top, 0px) + 16px); right: 16px; }
+  .card { border-radius: 18px; padding: 18px; cursor: default; }
+  .card:hover, .card:hover .card__image-wrap { transform: none; }
+  .card__header { margin-bottom: 20px; }
+  .card__ph, .card__image-wrap, .card__image-wrap img { border-radius: 12px; }
+  .card__desc, .card:hover .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
+  .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
+  .case-gallery { grid-template-columns: 1fr; }
+  .case-meta { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 390px) {
+  .content { padding-left: 12px; padding-right: 12px; }
+  .card { padding: 16px; }
+}
+@media (hover: none) {
+  .card:hover, .card:hover .card__image-wrap { transform: none; }
+  .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
+}

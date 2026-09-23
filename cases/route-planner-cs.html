@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Route Planner CS — Артём Костин</title>
+<meta name="description" content="Кейс: система автопланирования смен для 5000+ курьеров Ozon.">
+<meta name="author" content="Артём Костин">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2319191A'/%3E%3Ctext x='32' y='43' font-size='30' font-weight='800' text-anchor='middle' fill='%23FFFFFF' font-family='Arial, Helvetica, sans-serif'%3EAK%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../styles.css">
+
+<script>
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  try {
+    var raw = localStorage.getItem('portfolio.state');
+    var data = raw ? JSON.parse(raw) : null;
+    var t = data && data.theme;
+    if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">К содержимому</a>
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Включить тёмную тему"><span data-theme-label>Тёмная</span></button>
+
+<div class="page">
+  <main class="content" id="main">
+
+    <nav class="case-top" aria-label="Навигация">
+      <a class="case-back" href="../index.html">← На главную</a>
+    </nav>
+
+    <header class="case-hero" data-reveal>
+      <div class="case-hero__who">
+        <span class="card__logo" aria-hidden="true">O</span>
+        <div><h1>Route Planner CS</h1><span class="card__org">Ozon</span></div>
+      </div>
+      <p class="case-hero__lead">Система автопланирования смен для курьерской службы Ozon — вместо ручного распределения диспетчер получает готовый график, который учитывает загрузку и логистические ограничения.</p>
+      <dl class="case-meta">
+        <div><dt>Роль</dt><dd>Старший продуктовый дизайнер</dd></div>
+        <div><dt>Период</dt><dd>2021–2022</dd></div>
+        <div><dt>Компания</dt><dd>Ozon</dd></div>
+        <div><dt>Платформа</dt><dd>Web (админка)</dd></div>
+      </dl>
+    </header>
+
+    <div class="case-cover"><div class="card__ph"></div></div>
+
+    <section class="case-block" data-reveal>
+      <h2>Задача</h2>
+      <p>Смены для тысяч курьеров распределялись вручную: диспетчеры собирали графики в таблицах, слабо учитывая реальную загрузку по зонам и времени. Это тормозило масштабирование службы и приводило к неоптимальным логистическим затратам.</p>
+    </section>
+
+    <section class="case-block" data-reveal>
+      <h2>Процесс</h2>
+      <p>Спроектировал систему автопланирования смен: диспетчер задаёт параметры и ограничения, система строит и предлагает график, который можно скорректировать вручную перед публикацией.</p>
+      <div class="case-gallery">
+        <div class="card__ph"></div>
+        <div class="card__ph"></div>
+      </div>
+    </section>
+
+    <section class="case-block" data-reveal>
+      <h2>Результат</h2>
+      <ul class="case-results">
+        <li>Спроектировал систему автопланирования смен для 5000+ курьеров.</li>
+        <li>Оптимизировал логистические затраты за счёт более точного распределения нагрузки.</li>
+      </ul>
+    </section>
+
+    <section class="case-next" data-reveal>
+      <span class="case-next__label">Следующий кейс</span>
+      <a class="card" href="ozon-point.html">
+        <div class="card__header">
+          <div class="card__who">
+            <span class="card__logo" aria-hidden="true">O</span>
+            <div><h3 class="card__title">Навигация для&nbsp;приложения ПВЗ</h3><span class="card__org">Ozon</span></div>
+          </div>
+        </div>
+        <div class="card__image-wrap"><div class="card__ph"></div></div>
+      </a>
+    </section>
+
+    <p class="copyright">&copy; 2026 Артём Костин</p>
+  </main>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>

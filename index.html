@@ -195,6 +195,11 @@ a.card { cursor: pointer; }
 .card:hover .card__desc, .card:focus-visible .card__desc { max-height: 180px; opacity: 1; transition: max-height 680ms var(--ease), opacity 620ms ease 220ms; }
 .card__desc p { width: min(50%, 588px); font-size: 14px; line-height: 1.56; color: var(--muted); }
 
+/* Неактивная карточка («Скоро») — кейс ещё не описан, не кликается */
+.card--soon { cursor: default; }
+.card--soon:hover, .card--soon:hover .card__image-wrap { transform: none; }
+.card__tag--soon { background: var(--text); color: var(--page); }
+
 .copyright { margin-top: 24px; padding-left: 8px; font-size: 12px; line-height: 1.4; color: var(--muted); }
 
 /* ============ Модалка резюме ============ */
@@ -384,20 +389,25 @@ a.card { cursor: pointer; }
         ПРЕВЬЮ: вместо <div class="card__ph"></div> положи <img src="..." alt="..." width="1704" height="1064" loading="lazy">.
         ОПИСАНИЕ: под .card__image-wrap добавь <div class="card__desc"><p>Одно предложение про задачу и результат.</p></div>;
                   на компьютере оно появляется при наведении, на телефоне видно всегда.
-        ССЫЛКИ: сейчас ведут на кейсы прежнего сайта; позже заменить на свои страницы (например cases/betest.html).
+        ССЫЛКИ: ведут на страницы кейсов в cases/ (шаблон + стили — styles.css, script.js).
+
+        НЕАКТИВНАЯ КАРТОЧКА («Скоро»): пока кейс не описан — вместо <a class="card" href="..."> используй
+        <div class="card card--soon" aria-disabled="true"> (без href), в .card__header добавь
+        <span class="card__tag card__tag--soon">Скоро</span>. Как опишешь кейс — верни <a> с href и убери тег.
       -->
 
-      <a class="card" href="https://akostin.framer.website/work/betest" data-reveal>
+      <div class="card card--soon" data-reveal aria-disabled="true">
         <div class="card__header">
           <div class="card__who">
             <span class="card__logo" aria-hidden="true">B</span>
             <div><h3 class="card__title">Betest</h3><span class="card__org">Betest.io (Beta), стартап</span></div>
           </div>
+          <span class="card__tag card__tag--soon">Скоро</span>
         </div>
         <div class="card__image-wrap"><div class="card__ph"></div></div>
-      </a>
+      </div>
 
-      <a class="card" href="https://akostin.framer.website/work/route-planner-cs" data-reveal>
+      <a class="card" href="cases/route-planner-cs.html" data-reveal>
         <div class="card__header">
           <div class="card__who">
             <span class="card__logo" aria-hidden="true">O</span>
@@ -407,7 +417,7 @@ a.card { cursor: pointer; }
         <div class="card__image-wrap"><div class="card__ph"></div></div>
       </a>
 
-      <a class="card" href="https://akostin.framer.website/work/ozon-point" data-reveal>
+      <a class="card" href="cases/ozon-point.html" data-reveal>
         <div class="card__header">
           <div class="card__who">
             <span class="card__logo" aria-hidden="true">O</span>
@@ -417,7 +427,7 @@ a.card { cursor: pointer; }
         <div class="card__image-wrap"><div class="card__ph"></div></div>
       </a>
 
-      <a class="card" href="https://akostin.framer.website/work/arrival" data-reveal>
+      <a class="card" href="cases/arrival.html" data-reveal>
         <div class="card__header">
           <div class="card__who">
             <span class="card__logo" aria-hidden="true">A</span>
