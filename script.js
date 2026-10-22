@@ -130,3 +130,57 @@
     });
   });
 })();
+
+(function () {
+  /* Полноэкранный просмотр изображений кейса: клик по картинке внутри .case-fig__media
+     открывает её на весь экран, повторный клик по ней — реальный размер (с прокруткой).
+     Закрытие — Esc, клик по подложке или крестик. Заглушки без <img> не затрагиваются. */
+  var imgs = [].slice.call(document.querySelectorAll('.case-fig__media img'));
+  if (!imgs.length) return;
+
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Просмотр изображения');
+  box.innerHTML = '<button class="lightbox__close" type="button" aria-label="Закрыть">' +
+    '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>' +
+    '<img class="lightbox__img" alt="">';
+  document.body.appendChild(box);
+  var big = box.querySelector('.lightbox__img');
+  var closeBtn = box.querySelector('.lightbox__close');
+  var lastFocus = null;
+
+  function onKey(e) { if (e.key === 'Escape') close(); }
+  function open(img) {
+    lastFocus = document.activeElement;
+    big.src = img.getAttribute('data-full') || img.currentSrc || img.src;
+    big.alt = img.alt;
+    box.classList.remove('is-zoomed');
+    box.classList.add('is-open');
+    document.body.classList.add('lightbox-open');
+    document.addEventListener('keydown', onKey);
+    closeBtn.focus();
+  }
+  function close() {
+    box.classList.remove('is-open', 'is-zoomed');
+    document.body.classList.remove('lightbox-open');
+    document.removeEventListener('keydown', onKey);
+    big.removeAttribute('src');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  imgs.forEach(function (img) {
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    img.addEventListener('click', function () { open(img); });
+    img.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); }
+    });
+  });
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', function (e) {
+    if (e.target === big) box.classList.toggle('is-zoomed');
+    else if (e.target === box) close();
+  });
+})();

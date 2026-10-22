@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Route Planner CS — Артём Костин</title>
-<meta name="description" content="Кейс: система автопланирования смен для 5000+ курьеров Ozon.">
+<meta name="description" content="Кейс: автоматизация планирования маршрутных листов для курьеров Ozon — на 70% меньше времени у планировщиков.">
 <meta name="author" content="Артём Костин">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
@@ -46,32 +46,74 @@
       <div class="case-hero__who">
         <span class="card__org">Ozon</span>
       </div>
-      <h1 class="case-hero__title">Автопланирование смен для курьеров Ozon</h1>
-      <p class="case-hero__desc">Вместо ручного распределения диспетчер получает готовый график, который учитывает загрузку и логистические ограничения.</p>
+      <h1 class="case-hero__title">Route Planner CS</h1>
+      <p class="case-hero__desc">Инструмент, который сам строит маршрутные листы для&nbsp;курьеров. Планировщику остаются запуск расчёта и&nbsp;контроль.</p>
+      <dl class="case-stats">
+        <div class="case-stat"><dt>≈&nbsp;2&nbsp;часа</dt><dd>уходило на&nbsp;планирование одной волны вручную</dd></div>
+        <div class="case-stat"><dt>−70%</dt><dd>времени на&nbsp;планирование в&nbsp;среднем после тестового внедрения</dd></div>
+      </dl>
     </header>
 
-    <div class="case-cover"><div class="card__ph"></div></div>
+    <!-- Картинки: вместо .case-ph положи <img src="../img/…" alt="…" width="…" height="…">
+         внутрь .case-fig__media — клик по ней сам откроется на весь экран (script.js). -->
+    <figure class="case-fig case-cover" data-reveal>
+      <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран расчёта маршрутных листов">Обложка: экран расчёта маршрутных листов</div></div>
+    </figure>
 
     <section class="case-block" data-reveal>
-      <h2>Задача</h2>
-      <p>Смены для тысяч курьеров распределялись вручную: диспетчеры собирали графики в таблицах, слабо учитывая реальную загрузку по зонам и времени. Это тормозило масштабирование службы и приводило к неоптимальным логистическим затратам.</p>
+      <h2>Проблема</h2>
+      <p>Раньше сотрудники Ozon планировали маршрутные листы (МЛ) в&nbsp;старой системе почти вручную: автоматизации там было минимум.</p>
+      <p>На&nbsp;планирование одной волны могло уходить около 2&nbsp;часов.</p>
+      <figure class="case-fig">
+        <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: старый интерфейс планирования">Старый интерфейс: список заданий и&nbsp;карта</div></div>
+        <figcaption>Примеры старого интерфейса</figcaption>
+      </figure>
     </section>
 
     <section class="case-block" data-reveal>
-      <h2>Процесс</h2>
-      <p>Спроектировал систему автопланирования смен: диспетчер задаёт параметры и ограничения, система строит и предлагает график, который можно скорректировать вручную перед публикацией.</p>
-      <div class="case-gallery">
-        <div class="card__ph"></div>
-        <div class="card__ph"></div>
+      <h2>Решение</h2>
+      <p>Мы изучили, как планировщики работают вручную, и&nbsp;спроектировали инструмент, в&nbsp;котором их участие минимально.</p>
+      <p>Основную работу теперь делают алгоритмы. Пользователь запускает процесс и&nbsp;следит, чтобы не&nbsp;возникло системных ошибок.</p>
+
+      <div class="case-step">
+        <span class="case-step__label">Шаг 1</span>
+        <h3>Импорт и&nbsp;проверка заданий</h3>
+        <p>Если ошибок нет, от&nbsp;пользователя ничего не&nbsp;требуется: остаётся запустить расчёт.</p>
+        <figure class="case-fig">
+          <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран импорта заданий">Экран импорта и&nbsp;проверки заданий</div></div>
+          <figcaption>Импорт заданий</figcaption>
+        </figure>
+      </div>
+
+      <div class="case-step">
+        <span class="case-step__label">Шаг 2</span>
+        <h3>Расчёт маршрутных листов</h3>
+        <p>Если курьеров хватило, пользователь сразу экспортирует результат в&nbsp;другие курьерские системы и&nbsp;завершает планирование.</p>
+        <figure class="case-fig">
+          <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран расчёта маршрутных листов">Экран расчёта маршрутных листов</div></div>
+          <figcaption>Расчёт завершён, МЛ можно экспортировать</figcaption>
+        </figure>
+      </div>
+
+      <div class="case-step">
+        <span class="case-step__label">Дополнительные сценарии</span>
+        <p>Они появляются, когда есть проблемные задания и&nbsp;не&nbsp;хватает курьеров. Тогда системе пока нужна помощь человека:</p>
+        <ul class="case-list">
+          <li>исправить проблемные задания;</li>
+          <li>добавить курьеров.</li>
+        </ul>
+        <figure class="case-fig">
+          <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран проверки маршрутных листов">Экран проверки маршрутных листов: список, метрики, карта</div></div>
+          <figcaption>Экран проверки маршрутных листов</figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="case-block" data-reveal>
       <h2>Результат</h2>
-      <ul class="case-results">
-        <li>Спроектировал систему автопланирования смен для 5000+ курьеров.</li>
-        <li>Оптимизировал логистические затраты за счёт более точного распределения нагрузки.</li>
-      </ul>
+      <p>После тестового внедрения нового процесса планирования, основанного на&nbsp;автоматизации, планировщики стали тратить на&nbsp;эту работу в&nbsp;среднем на&nbsp;70% меньше времени.</p>
+      <p>Продукт протестирован и&nbsp;внедрён для&nbsp;планирования в&nbsp;небольших городах.</p>
+      <p>Для&nbsp;больших городов нужно ещё доработать алгоритм и&nbsp;добавить возможность ручной правки маршрута.</p>
     </section>
 
     <section class="case-next" data-reveal>
