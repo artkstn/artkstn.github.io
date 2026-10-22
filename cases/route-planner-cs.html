@@ -61,8 +61,14 @@
       <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран расчёта маршрутных листов">Обложка: экран расчёта маршрутных листов</div></div>
     </figure>
 
+    <section class="case-flow" data-reveal aria-label="Как это работает">
+      <span class="case-label">Как это работает</span>
+      <p class="case-flow__text"><span>Импорт и&nbsp;проверка заданий</span> <span>→&nbsp;Расчёт маршрутных листов</span> <span>→&nbsp;Экспорт в&nbsp;курьерские системы</span></p>
+    </section>
+
     <section class="case-block" data-reveal>
-      <h2>Проблема</h2>
+      <span class="case-label">Проблема</span>
+      <h2>Планирование было почти ручным</h2>
       <p>Раньше сотрудники Ozon планировали маршрутные листы (МЛ) в&nbsp;старой системе почти вручную: составляли маршруты с&nbsp;нуля.</p>
       <p>В&nbsp;крупных городах на&nbsp;одну волну уходило около часа. В&nbsp;небольших всё было проще и&nbsp;быстрее, но&nbsp;и&nbsp;заказов там меньше.</p>
       <figure class="case-fig case-fig--narrow">
@@ -72,42 +78,46 @@
     </section>
 
     <section class="case-block" data-reveal>
-      <h2>Решение</h2>
+      <span class="case-label">Решение</span>
+      <h2>Алгоритмы строят маршруты, человек контролирует</h2>
       <p>Я поговорил с&nbsp;10+ планировщиками, чтобы понять, как они работают, и&nbsp;спроектировал инструмент, где человек почти не&nbsp;участвует в&nbsp;расчёте.</p>
 
       <h3>Минимум участия человека</h3>
       <p>Планировщики опасались, что их заменят роботами. Отчасти это правда: раньше они составляли маршруты с&nbsp;нуля и&nbsp;тратили на&nbsp;это основное время, а&nbsp;теперь это делают алгоритмы. Пользователь запускает расчёт, следит за&nbsp;ошибками и&nbsp;разбирает исключения.</p>
 
-      <h3>Как это работает</h3>
-      <div class="case-steps">
-        <div class="case-step">
-          <span class="case-step__label">Шаг 1</span>
+      <div class="case-split">
+        <div class="case-split__text">
+          <span class="case-label">Шаг 1</span>
           <h3>Импорт и&nbsp;проверка заданий</h3>
           <p>Система проверяет загруженные задания. Если ошибок нет, пользователю ничего делать не&nbsp;нужно.</p>
-          <figure class="case-fig">
-            <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран импорта заданий">Экран импорта и&nbsp;проверки заданий</div></div>
-            <figcaption>Импорт заданий</figcaption>
-          </figure>
         </div>
-
-        <div class="case-step">
-          <span class="case-step__label">Шаг 2</span>
-          <h3>Расчёт маршрутных листов</h3>
-          <p>Если курьеров хватило, пользователь сразу экспортирует МЛ в&nbsp;другие курьерские системы, и&nbsp;планирование завершено.</p>
-          <figure class="case-fig">
-            <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран расчёта маршрутных листов">Экран расчёта маршрутных листов</div></div>
-            <figcaption>Расчёт завершён, МЛ можно экспортировать</figcaption>
-          </figure>
-        </div>
+        <figure class="case-fig">
+          <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран импорта заданий">Экран импорта и&nbsp;проверки заданий</div></div>
+          <figcaption>Импорт заданий</figcaption>
+        </figure>
       </div>
 
-      <div class="case-step">
-        <h3>Дополнительные сценарии</h3>
-        <p>Бывает, что в&nbsp;заданиях есть проблемы, например некорректный адрес или слишком большие объёмно-весовые характеристики (ОВХ). Или не&nbsp;хватает курьеров. Тогда системе пока нужна помощь человека:</p>
-        <ul class="case-list">
-          <li>Исправить проблемные задания</li>
-          <li>Добавить курьеров</li>
-        </ul>
+      <div class="case-split">
+        <div class="case-split__text">
+          <span class="case-label">Шаг 2</span>
+          <h3>Расчёт маршрутных листов</h3>
+          <p>Если курьеров хватило, пользователь сразу экспортирует МЛ в&nbsp;другие курьерские системы, и&nbsp;планирование завершено.</p>
+        </div>
+        <figure class="case-fig">
+          <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран расчёта маршрутных листов">Экран расчёта маршрутных листов</div></div>
+          <figcaption>Расчёт завершён, МЛ можно экспортировать</figcaption>
+        </figure>
+      </div>
+
+      <div class="case-split">
+        <div class="case-split__text">
+          <h3>Дополнительные сценарии</h3>
+          <p>Бывает, что в&nbsp;заданиях есть проблемы, например некорректный адрес или слишком большие объёмно-весовые характеристики (ОВХ). Или не&nbsp;хватает курьеров. Тогда системе пока нужна помощь человека:</p>
+          <ul class="case-list">
+            <li>Исправить проблемные задания</li>
+            <li>Добавить курьеров</li>
+          </ul>
+        </div>
         <figure class="case-fig">
           <div class="case-fig__media"><div class="case-ph" role="img" aria-label="Заглушка: экран проверки маршрутных листов">Экран проверки маршрутных листов: список, метрики, карта</div></div>
           <figcaption>Экран проверки маршрутных листов</figcaption>
@@ -116,8 +126,9 @@
     </section>
 
     <section class="case-block" data-reveal>
-      <h2>Результат</h2>
-      <p>После тестового внедрения планировщики стали тратить на&nbsp;эту работу в&nbsp;среднем на&nbsp;70% меньше времени.</p>
+      <span class="case-label">Результат</span>
+      <h2>Планировщики стали тратить на&nbsp;70% меньше времени</h2>
+      <p>Это среднее значение после тестового внедрения.</p>
       <p>Инструмент протестирован и&nbsp;внедрён в&nbsp;небольших городах, где заказов меньше, а&nbsp;нагрузка ниже.</p>
       <p>Для&nbsp;крупных городов пока нужно доработать алгоритм и&nbsp;добавить ручную правку маршрута.</p>
     </section>

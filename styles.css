@@ -77,7 +77,7 @@ body.cv-open .theme-toggle { display: none; }
 .content {
   width: 100%; max-width: var(--content-width); margin: 0 auto;
   padding: var(--pad-top) clamp(24px, 5vw, 48px) 120px;
-  display: flex; flex-direction: column; gap: 88px;
+  display: flex; flex-direction: column; gap: 120px;
 }
 
 .actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -231,8 +231,8 @@ body.cv-open .case-top { display: none; }
 
 /* Блок текста: заголовок и абзацы — узкой колонкой, изображения — на всю ширину */
 .case-block { display: flex; flex-direction: column; gap: 20px; }
-.case-block > :not(.case-fig):not(.case-step):not(.case-steps) { max-width: 720px; }
-.case-block h2 { font-size: clamp(24px, 2.8vw, 32px); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; text-wrap: balance; }
+.case-block > :where(:not(.case-fig, .case-split)) { max-width: 720px; }
+.case-block h2 { max-width: 900px; font-size: clamp(28px, 3.6vw, 48px); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; }
 .case-block h3 { font-size: 18px; font-weight: 500; line-height: 1.3; }
 .case-block p { font-size: 18px; line-height: 1.6; color: var(--text); text-wrap: pretty; }
 
@@ -250,14 +250,20 @@ body.cv-open .case-top { display: none; }
 /* Второстепенное изображение — по ширине текстовой колонки */
 .case-fig--narrow { max-width: 720px; }
 
-/* Шаги процесса */
-.case-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; margin-top: 24px; }
-.case-steps .case-step { margin-top: 0; }
-.case-steps .case-fig { margin-top: auto; }
-.case-step { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
-.case-step > * { max-width: 720px; }
-.case-step > .case-fig { max-width: none; }
-.case-step__label { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+/* Подпись-рубрика над заголовком или шагом */
+.case-label { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+
+/* Одна крупная фраза-схема: суть кейса за несколько секунд */
+.case-flow { display: flex; flex-direction: column; gap: 20px; }
+.case-flow__text { font-size: clamp(28px, 4.4vw, 60px); font-weight: 400; line-height: 1.12; letter-spacing: -0.025em; text-wrap: balance; }
+.case-flow__text span { display: inline; }
+
+/* Строка «текст слева, экран справа»: картинка рядом с текстом и крупнее колонки текста */
+.case-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(24px, 4vw, 56px); align-items: start; margin-top: 56px; }
+.case-split__text { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 96px; }
+.case-split__text h3 { font-size: 22px; line-height: 1.25; }
+.case-split__text p { font-size: 16px; }
+.case-split .case-fig { margin-top: 0; }
 
 .case-list { display: flex; flex-direction: column; gap: 8px; }
 .case-list li { position: relative; padding-left: 22px; font-size: 18px; line-height: 1.5; }
@@ -303,7 +309,9 @@ body.lightbox-open { overflow: hidden; }
 /* ============ Адаптив ============ */
 @media (max-width: 900px) {
   :root { --pad-top: 72px; }
-  .content { gap: 48px; padding-bottom: 80px; }
+  .content { gap: 72px; padding-bottom: 80px; }
+  .case-split { grid-template-columns: 1fr; margin-top: 32px; }
+  .case-split__text { position: static; }
   .card__header { margin-bottom: 32px; }
 }
 @media (max-width: 640px) {
@@ -318,7 +326,7 @@ body.lightbox-open { overflow: hidden; }
   .card__ph, .card__image-wrap, .card__image-wrap img { border-radius: 12px; }
   .card__desc, .card:hover .card__desc { max-height: none; margin-top: 18px; opacity: 1; }
   .card__desc p { width: 100%; font-size: 13px; line-height: 1.48; }
-  .case-gallery, .case-steps { grid-template-columns: 1fr; }
+  .case-gallery { grid-template-columns: 1fr; }
   .case-hero__desc, .case-block p, .case-list li, .case-results li { font-size: 16px; }
   .case-fig__media, .case-ph { border-radius: 16px; }
   .case-stat { padding: 20px; }
