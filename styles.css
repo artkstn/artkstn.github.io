@@ -223,9 +223,9 @@ body.cv-open .case-top { display: none; }
 
 /* Ключевые цифры под заголовком */
 .case-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
-.case-stat { flex: 1 1 260px; max-width: 360px; padding: 24px; border-radius: 20px; background: var(--card); }
-.case-stat dt { font-size: clamp(32px, 4vw, 44px); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; }
-.case-stat dd { margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.case-stat { flex: 1 1 240px; padding: 24px; border-radius: 20px; background: var(--card); }
+.case-stat dt { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.case-stat dd { margin-top: 10px; font-size: 18px; line-height: 1.4; text-wrap: pretty; }
 
 .case-cover { width: 100%; }
 
